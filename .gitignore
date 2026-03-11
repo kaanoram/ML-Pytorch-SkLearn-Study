@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Data / outputs
+*.csv
+*.tsv
+*.parquet
+*.pkl
+*.joblib
+
+# Python packaging
+build/
+dist/
+*.egg-info/
