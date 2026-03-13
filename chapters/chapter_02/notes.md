@@ -16,7 +16,8 @@
 ## Key Terms/Formulas
 
 $$
-\delta w_j = \eta(y^{(i)} - \hat(y)^{(i)})
+\delta w_j = \eta(y^{(i)} - \hat{y}^{(i)})x_j^{(i)}
+\delta b = \eta(y^{(i)} - \hat{y}^{(i)})
 $$
 
 ## Code work
