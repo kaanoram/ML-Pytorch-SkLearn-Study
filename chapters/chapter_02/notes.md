@@ -8,7 +8,7 @@
 
 - The perceptron algorithm:  
   - Initialize the weights and bias to 0 or small random numbers
-  - For each training example $x^{(i)}:  
+  - For each training example $x^{(i)}$:  
     - Compute the output value
     - Update the weights and bias unit  
     - 
