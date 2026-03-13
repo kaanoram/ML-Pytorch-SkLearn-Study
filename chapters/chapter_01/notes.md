@@ -1,7 +1,7 @@
 # Chapter 1 - Giving Computers the Ability to Learn From Data
 
 **Status:** Complete  
-**Code:** N/A
+**Code:** N/A  
 **Focus:** Machine Learning Theory
 
 ## Summary
