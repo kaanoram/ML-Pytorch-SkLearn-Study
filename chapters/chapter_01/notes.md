@@ -4,44 +4,28 @@
 **Code:** N/A
 **Focus:** Machine Learning Theory
 
-## Main Ideas
+## Summary
 
 - There are 3 types of machine learning: supervised learning, unsupervised learning, and reinforcement learning.
-- 
-- 
+- The main goal in supervised learning is to learn a model from labeled training data that allows us to make predictions about unseen or future data.
+- Classification is a subcategory of supervised learning where the goal is to predict the categorical class labels of new instances or data points based on past observations. Those class labels are discrete, unordered values that can be understood as the group memberships of the data points.
+- Regression is another subcategory of supervised learning where the goal is to predict continuous outcomes.
+- In reinforcement learning, the goal is to develop a system (agent) that improves its performance based on interactions with the environment. Through its interactions with the environment, an agent can then use reinforcement learning to learn a series of actions that maximizes this reward via an exploratory trial-and-error approach or deliberative planning.
+- In unsupervised learning, we are dealing with unlabeled data to extract meaningful information without the guidance of a known outcome variable or reward function.
 
-## Key Concepts
-
-- 
-- 
-- 
-
-## Important Formulas / Metrics
+## Key Terms/Formulas
 
 - N/A
 
-## What This Chapter Is Really About
+## Code work
 
-Write 3-6 sentences explaining the chapter in plain English.
+- Reproduced: N/A
+- Modified: N/A
 
-## What Confused Me Initially
-
-- N/A
-
-## What Clicked After Coding
+## My experiment
 
 - N/A
 
-## Small Experiment I Tried
-
-- N/A
-
-## Key Takeaways
-
-- 
-- 
-- 
-
-## Possible Standalone Project Ideas
+## My takeaway
 
 - N/A
