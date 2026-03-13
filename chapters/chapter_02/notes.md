@@ -15,9 +15,9 @@
 
 ## Key Terms/Formulas
 
-- ```math
-
+$$
 \delta w_j = \eta(y^{(i)} - \hat(y)^{(i)})
+$$
 
 ## Code work
 
