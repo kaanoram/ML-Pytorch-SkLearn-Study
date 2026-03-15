@@ -46,22 +46,15 @@ $$
 $$
 
 $$
-\frac{\partial L}{\partial w_j}
-=
--\frac{2}{n}\sum_{i=1}^{n}
-\left(y^{(i)} - \sigma\left(z^{(i)}\right)\right)x_j^{(i)}
+\frac{\partial L}{\partial w_j} = -\frac{2}{n}\sum_{i=1}^{n}\left(y^{(i)} - \sigma\left(z^{(i)}\right)\right)x_j^{(i)}
 $$
 
 $$
-\frac{\partial L}{\partial b}
-=
--\frac{2}{n}\sum_{i=1}^{n}
-\left(y^{(i)} - \sigma\left(z^{(i)}\right)\right)
+\frac{\partial L}{\partial b} = -\frac{2}{n}\sum_{i=1}^{n}\left(y^{(i)} - \sigma\left(z^{(i)}\right)\right)
 $$
 
 $$
-\Delta w_j = -\eta \frac{\partial L}{\partial w_j},
-\qquad
+\Delta w_j = -\eta \frac{\partial L}{\partial w_j}, \qquad
 \Delta b = -\eta \frac{\partial L}{\partial b}
 $$
 
