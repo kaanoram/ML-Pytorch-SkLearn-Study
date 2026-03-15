@@ -21,11 +21,3 @@
 
 - Reproduced: N/A
 - Modified: N/A
-
-## My experiment
-
-- N/A
-
-## My takeaway
-
-- N/A
