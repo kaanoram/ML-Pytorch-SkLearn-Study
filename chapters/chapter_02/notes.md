@@ -64,13 +64,5 @@ $$
 
 ## Code work
 
-- Reproduced: N/A
-- Modified: N/A
-
-## My experiment
-
-- N/A
-
-## My takeaway
-
-- N/A
+- Reproduced: Implementations for the perceptron and Adaline algorithms using gradient and stochastic gradient descent
+- Modified: The decision boundary plotting function was written to be more clear
