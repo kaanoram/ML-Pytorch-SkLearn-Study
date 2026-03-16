@@ -54,21 +54,13 @@ $$
 \end{cases}
 $$
 
-Likelihood function:  
+Likelihood function: 
 
 $$
-\mathcal{L}(w,b \mid x)
-=
-p(y \mid x; w,b)
-=
-\prod_{i=1}^{n} p\left(y^{(i)} \mid x^{(i)}; w,b\right)
-=
-\prod_{i=1}^{n}
-\left(\sigma\left(z^{(i)}\right)\right)^{y^{(i)}}
-\left(1-\sigma\left(z^{(i)}\right)\right)^{1-y^{(i)}}
+\mathcal{L}(w,b \mid x) = p(y \mid x; w,b) = \prod_{i=1}^{n} p\left(y^{(i)} \mid x^{(i)}; w,b\right) = \prod_{i=1}^{n}\left(\sigma\left(z^{(i)}\right)\right)^{y^{(i)}}\left(1-\sigma\left(z^{(i)}\right)\right)^{1-y^{(i)}}
 $$
 
-Log-likelihood function: 
+Log-likelihood function:  
 
 $$
 \ell(w,b \mid x)
