@@ -25,9 +25,18 @@
 
 ## Key Terms/Formulas
 
-Odds: $$ \frac{p}{1-p} $$  
-Logit: $$ logit(p) = log\frac{p}{1-p} = \sum_{i=j}w_jx_j + b = \mathbf{w}^Tx + b$$  
-Sigmoid function: $$ \sigma(z) = \frac{1}{1 + e^{-z}} $$  
+Odds:  
+$$  
+\frac{p}{1-p}  
+$$  
+Logit:  
+$$  
+logit(p) = log\frac{p}{1-p} = \sum_{i=j}w_jx_j + b = \mathbf{w}^Tx + b
+$$  
+Sigmoid function:  
+$$  
+\sigma(z) = \frac{1}{1 + e^{-z}}  
+$$  
 Threshold function:  
 $$
 \hat{y} =
