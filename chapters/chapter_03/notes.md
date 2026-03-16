@@ -22,7 +22,8 @@
   - *Logit* function is the logarithm of the odds (log-odds).  
   - We assume there is a linear relationship between the log-odds and the net inputs, but we are interested in the probability p. The logit function maps the probability to a real-number range, and the inverse function *logistic sigmoid function* maps the real-number range back to a [0, 1] range for probability p.
   - The output of the sigmoid function is the probability of a particular example belonging to class 1.
-  - 
+  - *Likelihood function* is the function we want to maximize when we build a logistic regression model. In practice, it is easier to maximize the log-likelihood since applying the logarithm reduces the potential for numerical underflows, and converting the product of factors into a summation makes it easier to calculate the derivative.
+  - Logistic regression assumes the target variable comes from a Bernouilli distribution.
 
 ## Key Terms/Formulas
 
@@ -64,6 +65,18 @@ Log-likelihood function:
 
 $$
 \ell(w,b \mid x) = \log \mathcal{L}(w,b \mid x) = \sum_{i=1}^{n}\left[y^{(i)} \log\left(\sigma\left(z^{(i)}\right)\right) + \left(1-y^{(i)}\right)\log\left(1-\sigma\left(z^{(i)}\right)\right)\right]
+$$
+
+Updating the weights and bias for logistic regression:
+
+$$
+\begin{align}
+\frac{\partial L}{\partial w_j} &= \frac{\partial L}{\partial \sigma}\frac{\partial \sigma}{\partial z}\frac{\partial z}{\partial w_j} \\
+&= \frac{\sigma - y}{\sigma (1 - \sigma)} \times \sigma (1 - \sigma) \times x_j \\
+&= -(y - \sigma)x_j
+\end{align} \\
+w_j := w_j + \eta(y - \sigma)x_j \\
+b := b + \eta(y - \sigma)
 $$
 
 ## Code work  
