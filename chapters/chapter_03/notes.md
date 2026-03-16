@@ -1,6 +1,6 @@
 # Chapter 3 - A Tour of Machine Learning Classifiers Using Scikit-Learn
 
-**Status:** In work
+**Status:** In work  
 **Code:** Perceptron and Adaline implementations  
 **Focus:** Logistic Regression, Support Vector Machines, Decision Trees, k-Nearest Neighbors
 
@@ -22,6 +22,7 @@
   - *Logit* function is the logarithm of the odds (log-odds).  
   - We assume there is a linear relationship between the log-odds and the net inputs, but we are interested in the probability p. The logit function maps the probability to a real-number range, and the inverse function *logistic sigmoid function* maps the real-number range back to a [0, 1] range for probability p.
   - The output of the sigmoid function is the probability of a particular example belonging to class 1.
+  - 
 
 ## Key Terms/Formulas
 
@@ -51,6 +52,35 @@ $$
 1 & \text{if } \hat{p} \geq 0.5 \\
 0 & \text{if } \hat{p} < 0.5
 \end{cases}
+$$
+
+Likelihood function:  
+
+$$
+\mathcal{L}(w,b \mid x)
+=
+p(y \mid x; w,b)
+=
+\prod_{i=1}^{n} p\left(y^{(i)} \mid x^{(i)}; w,b\right)
+=
+\prod_{i=1}^{n}
+\left(\sigma\left(z^{(i)}\right)\right)^{y^{(i)}}
+\left(1-\sigma\left(z^{(i)}\right)\right)^{1-y^{(i)}}
+$$
+
+Log-likelihood function: 
+
+$$
+\ell(w,b \mid x)
+=
+\log \mathcal{L}(w,b \mid x)
+=
+\sum_{i=1}^{n}
+\left[
+y^{(i)} \log\left(\sigma\left(z^{(i)}\right)\right)
++
+\left(1-y^{(i)}\right)\log\left(1-\sigma\left(z^{(i)}\right)\right)
+\right]
 $$
 
 ## Code work  
