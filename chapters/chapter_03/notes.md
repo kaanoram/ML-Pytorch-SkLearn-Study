@@ -60,19 +60,10 @@ $$
 \mathcal{L}(w,b \mid x) = p(y \mid x; w,b) = \prod_{i=1}^{n} p\left(y^{(i)} \mid x^{(i)}; w,b\right) = \prod_{i=1}^{n}\left(\sigma\left(z^{(i)}\right)\right)^{y^{(i)}}\left(1-\sigma\left(z^{(i)}\right)\right)^{1-y^{(i)}}
 $$
 
-Log-likelihood function:  
+Log-likelihood function:
 
 $$
-\ell(w,b \mid x)
-=
-\log \mathcal{L}(w,b \mid x)
-=
-\sum_{i=1}^{n}
-\left[
-y^{(i)} \log\left(\sigma\left(z^{(i)}\right)\right)
-+
-\left(1-y^{(i)}\right)\log\left(1-\sigma\left(z^{(i)}\right)\right)
-\right]
+\ell(w,b \mid x) = \log \mathcal{L}(w,b \mid x) = \sum_{i=1}^{n}\left[y^{(i)} \log\left(\sigma\left(z^{(i)}\right)\right) + \left(1-y^{(i)}\right)\log\left(1-\sigma\left(z^{(i)}\right)\right)\right]
 $$
 
 ## Code work  
