@@ -73,10 +73,10 @@ $$
 \begin{align}
 \frac{\partial L}{\partial w_j} &= \frac{\partial L}{\partial \sigma}\frac{\partial \sigma}{\partial z}\frac{\partial z}{\partial w_j} \\
 &= \frac{\sigma - y}{\sigma (1 - \sigma)} \times \sigma (1 - \sigma) \times x_j \\
-&= -(y - \sigma)x_j
-\end{align} \\
-w_j := w_j + \eta(y - \sigma)x_j \\
-b := b + \eta(y - \sigma)
+&= -(y - \sigma)x_j \\
+w_j &:= w_j + \eta(y - \sigma)x_j \\
+b &:= b + \eta(y - \sigma)
+\end{align}  
 $$
 
 ## Code work  
