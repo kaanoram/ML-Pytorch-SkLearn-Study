@@ -34,7 +34,7 @@ $$
 Logit:
 
 $$
-\operatorname{logit}(p) = \log\left(\frac{p}{1-p}\right) = \sum_{j=1}^{m} w_j x_j + b = \mathbf{w}^T \mathbf{x} + b
+\mathrm{logit}(p) = \log\left(\frac{p}{1-p}\right) = \sum_{j=1}^{m} w_j x_j + b = \mathbf{w}^T \mathbf{x} + b
 $$
 
 Sigmoid function:
@@ -52,6 +52,5 @@ $$
 0 & \text{if } \hat{p} < 0.5
 \end{cases}
 $$
-
 
 ## Code work  
