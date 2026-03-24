@@ -24,6 +24,41 @@
   - The output of the sigmoid function is the probability of a particular example belonging to class 1.
   - *Likelihood function* is the function we want to maximize when we build a logistic regression model. In practice, it is easier to maximize the log-likelihood since applying the logarithm reduces the potential for numerical underflows, and converting the product of factors into a summation makes it easier to calculate the derivative.
   - Logistic regression assumes the target variable comes from a Bernouilli distribution.
+  - For minimizing the logistic regression loss function, it is recommended to use more advanced approaches than regular stochastic gradient descent. Scikit-learn has a solver parameter that implements some of these more advanced techniques, such as *limited-memory Broyden-Fletcher-Goldfarb-Shanno (BFGS)* algorithm, abbreviated as lbfgs.
+- *Overfitting* is a common problem in machine learning, where a model performs well on the training data, but does not generalize well to unseen (test) data. If a model suffers from overfitting, we say it has a high *variance*, which can be caused by having too many parameters, leading to a model that is too complex given the underlying data. Similarly, a model can also suffer from *underfitting* (high bias), which means that our model is not complex enough to capture the pattern in the training data well and therefore also suffers from low performance on unseen data.  
+- *Bias-variance tradeoff* refers to the perfromance of a model, that is, a model is either high variance (overfitting) or high bias (underfitting). Variance measures the consistency of the model prediction for classifying a particular example if we retrain the model multiple times on different subsets of the training dataset. We can say that the model is sensitive to the randomness in the training data. In contrast, bias measures how far off the predictions are from the correct values in general if we rebuild the model multiple times on different training datasets, bias is the measure of the systematic error that is not due to randomness.
+- *Regularization* is a way to find a good bias-variance tradeoff via tuning the complexity of the model. Regularization is a very useful method for handling *collinearity* (high correlation among features), filtering out noise from data, and eventually preventing overfitting. 
+- The concept behind regularization is to introduce additional information to penalize extreme parameter values. The most common form of regualarization is called L2 regularization.  
+- Regularization is another reason why feature scaling (standardization) is important. For regularization to work properly, we need to ensure that all our features are on comparable scales.  
+- *Support Vector Machine (SVM)* is another powerful and widely used algorithm that is an extension of the perceptron algorithm. In SVM, our optimization objective is to maximize the margin. The margin is defined as the distance between the separating hyperplane (decision boundary) and the training examples that are closest to this hyperplane, which are called *support vectors*.  
+  - *Slack variables* serve to relax the linear constraints in SVM optimization objective for nonlinearly separable data to allow the convergence of the optimization in the presence of misclassifications, under appropriate loss penalization.
+  - The use of slack variable introduces the variable known as C in SVM contexts. C is the hyperparameter for controlling the penalty for missclassification. Large values of C correspond to large error penalties, whereas we are less strict about misclassification errors if we choose smaller values for C. We can use C to control the width of the margin and therefore tune the bias-variance tradeoff.
+  - In practical classification tasks, linear logistic regression and linear SVMs often yield very similar results. Logistic regression tries to maximize the conditional likelihoods of the training data, which makes it more prone to outliers than SVMs, which mostly care about the points that are closest to the decision boundary (support vectors). On the other hand, logistic regression has the advantage of being a simpler model and can be implemented more easily, and is mathematically easier to explain. Furthermore, logistic regression models can be easily updated, which is attractive when working with streaming data.
+  - Another reason SVMs enjoy high popularity among machine learning practitioners is that they can be kernelized to solve nonlinear classification problems, commonly known as *kernel SVM*.
+  - *Kernel methods* deal with linearly inseparable data by creating nonlinear combinations of the original features to project them onto a higher-dimensional space via a mapping function $\rho$ where the data becomes linearly separable.  
+  - To solve a nonlinear problem using an SVM, we would transform the training data into a higher-dimensional feature space via a mapping function $\rho$ and train a linear SVM model to classify the data in this new feature space. Then, we can use the same function to transform new, unseen data to classify it using the linear SVM model.  
+  - Construction of new features when we are dealing with high-dimensional data is computationally expensive, which makes us use *kernel trick*.
+  - *Radial basis function (RBF)* kernel, also called *Gaussian kernel* is a similarity function between a pair of examples. The range of the function is from 0 to 1, and similar points get a score close to 1, while dissimilar points get a score close to 0.
+- *Decision Tree* classifiers are attractive models if we care about interpretability. This model breaks down our data by making decisions based on asking a series of questions.
+  - Based on the features in our training dataset, the decision tree model learns a series of questions to infer the class labels of the examples. Using the decision algorithm, we start at the tree root and split the data on the feature that results in the largest *information gain (IG)*. In an iterative process, we can then repeat this splitting procedure at each child node until the leaves are pure. This means that the training examples at each node all belong to the same class. In practice, this can result in a very deep tree with many nodes, which can easily lead to overfitting. Thus, we typically want to *prune* the tree by setting a limit for the maximum depth of the tree.
+  - To split the nodes at the most informative features, we need to define an objective function to optimize via the tree learning algorithm. We use information gain as our objective function. The information gain is simply the difference between the *impurity* of the parent node and the sum of the child node impurities. The lower the impurities of the child nodes, the larger the information gain. For simplicity and to reduce the combinatorial search space, most libraries implement binary decision trees. 
+  - The three impurity measures for splitting criteria that are commonly used in binary decision trees are *Gini impurity*, *entropy* and the *classification error*.  
+  - The entropy is the negative of the sum of the proportions of the examples that belong to a class multiplied by the logarithm of this proportion, for each class. The entropy is 0 if all examples at a node belong to the same class, and the entropy is 1 (maximal) if we have uniform class distribution.  
+  - The Gini impurity can be understood as a criterion to minimize the probability of misclassification. Similar to entropy, Gini impurity is maximal if the classes are perfectly mixed.  
+  - In practice, both the Gini impurity and entropy typically yield very similar results, and it is not often worth spending much time on evaluating trees using different impurity criteria rather than experimenting with different pruning cut-offs.
+  - Decision trees can build complex decision boundaries by dividing the feature space into rectangles. However, we have to be careful since the deper the decision tree, the more complex the decision boundary becomes, which can easily result in overfitting.  
+  - It is important to note that feature scaling is not a requirement for decision tree algorithms.
+- *Ensemble methods* have gained a huge popularity in applications of machine learning during the last decade due to their good classification performance and robustness toward overfitting. *Random forest* algorithm is a decision-tree based algorithm that is an ensemble of decision trees. The idea behind a random forest is to average multiple (deep) decision trees that individually suffer from high variance to build a more robust model that has a better generalization performance and is less susceptible to overfitting. The random forest algorithm can be summarized in four simple steps:
+  - Draw a random *bootstrap* sample of size n (randomly choose n examples from the training dataset with replacement)
+  - Grow a decision tree from the boostrap sample. At each node:  
+    - Randomly select d features without replacement
+    - Split the node using the feature that provides the best split according to the objective function, for instance, maximizing the information gain.
+  - Repeat steps 1-2 k times
+  - Aggregate the prediction by each tree to assign the class label by *majority vote*.
+- Although random forests don't offer the same level of interpretability as decision treees, a big advantage of random forests is that we don't have to worry so much about choosing good hyperparameter values. We typically don't need to prune the random forest since the ensemble model is quite robust to the noise from averaging the predictions among the individual decision trees. The only parameter that we need to care about in practice is the number of trees, k, that we choose for the random forest. Typically, the larger the number of trees, the better the performance of the random forest classifier at the expense of an increased computational cost.
+- Although it is less common in practice, the boostrap sample size and the number of features that are randomly chosen for each split are hyperparameters that can be tuned. Decreasing the size of the bootstrap sample increases the diversity among the individual trees since the probability that a particular training example is included in the bootstrap sample is lower. Thus, shrinking the size of the bootstrap samples may increase the randomness of the random forest, and it can help to reduce the effect of overfitting. However, smaller bootstrap samples typically result in a lower overall performance of the random forest and a small gap between trianing and test performance, but a low test performance overall. 
+- In most implementations, including scikit-learn, the size of the bootstrap sample is chosen to be equal to the number of training examples in the original training dataset, which usually provides a good bias-variance tradeoff. For the number of features at each split, we want to choose a value that is smaller than the total number of features in the training dataset. A reasonable default that is used in scikit-learn and other implementations is $d = \sqrt(m)$, where m is the number of features in the dataset.
+
 
 ## Key Terms/Formulas
 
@@ -77,6 +112,38 @@ $$
 w_j &:= w_j + \eta(y - \sigma)x_j \\
 b &:= b + \eta(y - \sigma)
 \end{align}  
+$$
+
+L-2 regularization:
+
+$$
+\frac{\lambda}{2n}\lVert \mathbf{w} \rVert^2 = \frac{\lambda}{2n}\sum_{j=1}^{m}w_j^2
+$$
+
+Loss function for logistic regression with regularization: 
+
+$$
+\begin{align}
+\ell(w,b) &= \frac{1}{n}\sum_{i=1}^{n}\left[-y^{(i)}\log\left(\sigma\left(z^{(i)}\right)\right) - \left(1-y^{(i)}\right)\log\left(1-\sigma\left(z^{i}\right)\right)\right] + \frac{\lambda}{2n}\lVert \mathbf{w} \rVert^2 \\
+\frac{\partial \ell(w, b)}{\partial \w_j} = \left(\frac{1}{n} \sum_{i=1}^{n}\left(\sigma\left(\mathbf(w)^T\mathbf(x)^{(i)}\right)-y^{(i)}\right)x_j^{(i)}\right) + \frac{\lambda}{n}w_j
+$$
+
+Information gain:  
+
+$$
+IG\left(D_p, f\right) = I\left(D_p\right) - \frac{N_left}{N_p}I\left(D_left\right) - \frac{N_right}{N_p}I\left(D_right\right)
+$$
+
+Entropy:  
+
+$$
+I_h(t) = -\sum_{i=1}^{c}p(i\mid t)\log p(i\mid t)
+$$
+
+Gini impurity:
+
+$$
+I_G(t) = \sum_{i=1}^{c} p(i \mid t) \left(1 - p(i\mid t)\right) = 1 - \sum_{i=1}^{c} p(i\mid t)^2
 $$
 
 ## Code work  
