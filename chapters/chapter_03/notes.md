@@ -134,8 +134,7 @@ Loss function for logistic regression with regularization:
 
 $$
 \begin{align}
-L(\mathbf{w}, b) &= \frac{1}{n}\sum_{i=1}^{n}\left[-y^{(i)}\log\left(\sigma\left(z^{(i)}\right)\right)-\left(1-y^{(i)}\right)\log\left(1-\sigma\left(z^{(i)}\right)\right)\right]
-+ \frac{\lambda}{2n}\|\mathbf{w}\|_2^2 \\  
+L(\mathbf{w}, b) &= \frac{1}{n}\sum_{i=1}^{n}\left[-y^{(i)}\log\left(\sigma\left(z^{(i)}\right)\right)-\left(1-y^{(i)}\right)\log\left(1-\sigma\left(z^{(i)}\right)\right)\right] + \frac{\lambda}{2n}\|\mathbf{w}\|_2^2 \\  
 \frac{\partial L(\mathbf{w}, b)}{\partial w_j} &= \frac{1}{n}\sum_{i=1}^{n} \left(\sigma\left(\mathbf{w}^T \mathbf{x}^{(i)} + b\right)-y^{(i)}\right)x_j^{(i)}+ \frac{\lambda}{n}w_j
 \end{align}
 $$
