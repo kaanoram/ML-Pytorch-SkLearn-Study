@@ -130,31 +130,39 @@ $$
 \frac{\lambda}{2n}\lVert \mathbf{w} \rVert^2 = \frac{\lambda}{2n}\sum_{j=1}^{m}w_j^2
 $$
 
-Loss function for logistic regression with regularization: 
+Loss function for logistic regression with regularization:
 
 $$
 \begin{align}
-\ell(w,b) &= \frac{1}{n}\sum_{i=1}^{n}\left[-y^{(i)}\log\left(\sigma\left(z^{(i)}\right)\right) - \left(1-y^{(i)}\right)\log\left(1-\sigma\left(z^{i}\right)\right)\right] + \frac{\lambda}{2n}\lVert \mathbf{w} \rVert^2 \\
-\frac{\partial \ell(w, b)}{\partial \w_j} = \left(\frac{1}{n} \sum_{i=1}^{n}\left(\sigma\left(\mathbf(w)^T\mathbf(x)^{(i)}\right)-y^{(i)}\right)x_j^{(i)}\right) + \frac{\lambda}{n}w_j
+L(\mathbf{w}, b) &= \frac{1}{n}\sum_{i=1}^{n}\left[
+-y^{(i)}\log\left(\sigma\left(z^{(i)}\right)\right)
+-\left(1-y^{(i)}\right)\log\left(1-\sigma\left(z^{(i)}\right)\right)
+\right]
++ \frac{\lambda}{2n}\|\mathbf{w}\|_2^2 \\
+\frac{\partial L(\mathbf{w}, b)}{\partial w_j}
+&=
+\frac{1}{n}\sum_{i=1}^{n}
+\left(\sigma\left(\mathbf{w}^T \mathbf{x}^{(i)} + b\right)-y^{(i)}\right)x_j^{(i)}
++ \frac{\lambda}{n}w_j
 \end{align}
 $$
 
-Information gain:  
+Information gain:
 
 $$
-IG\left(D_p, f\right) = I\left(D_p\right) - \frac{N_left}{N_p}I\left(D_left\right) - \frac{N_right}{N_p}I\left(D_right\right)
+IG(D_p, f) = I(D_p) - \frac{N_{\text{left}}}{N_p} I(D_{\text{left}}) - \frac{N_{\text{right}}}{N_p} I(D_{\text{right}})
 $$
 
-Entropy:  
+Entropy:
 
 $$
-I_h(t) = -\sum_{i=1}^{c}p(i\mid t)\log p(i\mid t)
+I_H(t) = -\sum_{i=1}^{c} p(i \mid t)\log p(i \mid t)
 $$
 
 Gini impurity:
 
 $$
-I_G(t) = \sum_{i=1}^{c} p(i \mid t) \left(1 - p(i\mid t)\right) = 1 - \sum_{i=1}^{c} p(i\mid t)^2
+I_G(t) = \sum_{i=1}^{c} p(i \mid t)\left(1 - p(i \mid t)\right) = 1 - \sum_{i=1}^{c} p(i \mid t)^2
 $$
 
 ## Code work  
