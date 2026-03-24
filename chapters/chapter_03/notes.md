@@ -148,13 +148,13 @@ $$
 Entropy:
 
 $$
-I_H(t) = -\sum_{i=1}^{c} p(i \mid t)\log p(i \mid t)
+I_H(t) = -\sum_{i=1}^{c} p(i|t)\log_2 p(i|t)
 $$
 
 Gini impurity:
 
 $$
-I_G(t) = \sum_{i=1}^{c} p(i \mid t)\left(1 - p(i \mid t)\right) = 1 - \sum_{i=1}^{c} p(i \mid t)^2
+I_G(t) = \sum_{i=1}^{c} p(i|t)\left(1 - p(i|t)\right) = 1 - \sum_{i=1}^{c} p(i|t)^2
 $$
 
 ## Code work  
