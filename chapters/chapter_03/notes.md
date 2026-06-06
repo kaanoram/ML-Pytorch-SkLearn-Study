@@ -1,6 +1,6 @@
 # Chapter 3 - A Tour of Machine Learning Classifiers Using Scikit-Learn
 
-**Status:** In work  
+**Status:** Completed  
 **Code:** Perceptron and Adaline implementations  
 **Focus:** Logistic Regression, Support Vector Machines, Decision Trees, k-Nearest Neighbors
 
@@ -157,4 +157,4 @@ $$
 I_G(t) = \sum_{i=1}^{c} p(i|t)\left(1 - p(i|t)\right) = 1 - \sum_{i=1}^{c} p(i|t)^2
 $$
 
-## Code work  
+
