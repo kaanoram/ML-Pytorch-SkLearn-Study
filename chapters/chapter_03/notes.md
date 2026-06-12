@@ -28,7 +28,7 @@
 - *Overfitting* is a common problem in machine learning, where a model performs well on the training data, but does not generalize well to unseen (test) data. If a model suffers from overfitting, we say it has a high *variance*, which can be caused by having too many parameters, leading to a model that is too complex given the underlying data. Similarly, a model can also suffer from *underfitting* (high bias), which means that our model is not complex enough to capture the pattern in the training data well and therefore also suffers from low performance on unseen data.  
 - *Bias-variance tradeoff* refers to the perfromance of a model, that is, a model is either high variance (overfitting) or high bias (underfitting). Variance measures the consistency of the model prediction for classifying a particular example if we retrain the model multiple times on different subsets of the training dataset. We can say that the model is sensitive to the randomness in the training data. In contrast, bias measures how far off the predictions are from the correct values in general if we rebuild the model multiple times on different training datasets, bias is the measure of the systematic error that is not due to randomness.
 - *Regularization* is a way to find a good bias-variance tradeoff via tuning the complexity of the model. Regularization is a very useful method for handling *collinearity* (high correlation among features), filtering out noise from data, and eventually preventing overfitting.  
-- The concept behind regularization is to introduce additional information to penalize extreme parameter values. The most common form of regualarization is called L2 regularization.  
+- The concept behind regularization is to introduce additional information to penalize extreme parameter values. The most common form of regularization is called L2 regularization.  
 - Regularization is another reason why feature scaling (standardization) is important. For regularization to work properly, we need to ensure that all our features are on comparable scales.  
 - *Support Vector Machine (SVM)* is another powerful and widely used algorithm that is an extension of the perceptron algorithm. In SVM, our optimization objective is to maximize the margin. The margin is defined as the distance between the separating hyperplane (decision boundary) and the training examples that are closest to this hyperplane, which are called *support vectors*.  
   - *Slack variables* serve to relax the linear constraints in SVM optimization objective for nonlinearly separable data to allow the convergence of the optimization in the presence of misclassifications, under appropriate loss penalization.
@@ -156,5 +156,3 @@ Gini impurity:
 $$
 I_G(t) = \sum_{i=1}^{c} p(i|t)\left(1 - p(i|t)\right) = 1 - \sum_{i=1}^{c} p(i|t)^2
 $$
-
-
