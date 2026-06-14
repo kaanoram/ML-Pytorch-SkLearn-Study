@@ -1,6 +1,6 @@
 # Chapter 4 - Building Good Training Datasets - Data Preprocessing  
 
-**Status:** In work  
+**Status:** Completed  
 **Code:** Data Preprocessing  
 **Focus:** Removing and imputing missing values from a dataset, getting categorical data into shape, selecting relevant features for model construction  
 
@@ -25,8 +25,25 @@
 - The majority of machine learning and optimization algorithms behave much better if the features are on the same scale.  
 - There are two common approaches to bringing different features onto the same scale:
   - *Normalization* refers to the rescaling of the features to a range of [0, 1], which is a special case of *min-max scaling*. To normalize our data, we can simply apply the min-max scaling to each feature column.
-
+  - *Standardization* is more practical more many machine learning algorithms, especially for optimization algorithms like gradient descent. The reason is that many models initialize the weights to 0 or small random values close to 0, and when we center feature columns at a mean of 0 with a standard deviation of 1 (standard normal distribution), it makes it easier to learn the weights. Standardization does not change the shape of the distribution and does not transform a non-normally distributed data into normally distributed data. It also maintains useful information about outliers and makes algorithms less sensitive.
+- If we notice that a model performs much better on the training dataset than on the test dataset, this observation is a strong indicator of overfitting. We say the model has *high variance* The reason for overfitting is that our model is too complex for the given training data. Common solutions to reduce the generalization error are as follows:
+  - Collect more training data
+  - Introduce a penalty for complexity via regularization
+  - Choose a simpler model with fewer parameters
+  - Reduce the dimensionality of the data
+- *Dimensionality reduction* via feature selection is especially useful for unregularized models for reducing complexity and avoiding overfitting. There are two main categories of dimensionality reduction: *feature selection* and *feature extraction*. Via feature selection, we select a subset of the original features, whereas in feature extraction, we derive information from the feature set to construct a new feature subspace.
+- Sequential feature selection algorithms are a family of greedy search algorithms that are used to reduce an initial d-dimensional feature space to a k-dimensional feature subspace where k < d. The motivation behind feature selection algorithms is to automatically select a subset of features that are most relevant to the problem, to improve computational efficiency, or to reduce the generalization error of the model by removing irrelevant features or noise.
+- A classic sequential feature selection algorithm is *sequential backward selection (SBS)* which aims to reduce the dimensionality of the initial feature subspace with a minimum decay in performance of the classifier to improve upon computational efficiency. In certain cases, SVS can even improve the predictive power of the model if a model suffers from overfitting.
+- The idea behind SBS is quite simple, SBS sequentially removes features from the full feature subset until the new feature subspace contains the desired number of features. To determine which feature is to be removed at each stage, we need to define the criterion function that we want to minimize.  
+- The criterion calculated by the criterion function can simply be the difference in performance of the classifier before and after the removal of a particular feature. Then, the feature to be removed at each stage can simply be defined as the feature that maximizes this criterion, or in more simple terms, at each stage we eliminate the feature that causes the least performance loss after removal.
+- We can also measure the feature importance as the averaged impurity decrease computed from all decision trees in the random forest, without making assumptions about whether our data is linearly separable or not. However, as far as interpretability is concerned, the random forest technique comes with an important gotcha that is worth mentioning. If two or more features are highly correlated, one feature may be ranked very highly while the information on the other features(s) may not be fully captured. On the other hand, we don't need to be concerned about this problem if we are merely interested in the predictive performance of the model rather than the interpretation of feature importance values.
 
 ## Key Terms/Formulas
 
+Min-max scaling:
+
 $x_{norm}^{(i)} = \frac{x^{i} - x_{min}}{x_{max} - x_{min}}$
+
+Standardization:
+
+$x_{std}^{(i)} = \frac{x^{i} - \mu{x}}{\sigma_{x}}$
