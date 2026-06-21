@@ -1,6 +1,6 @@
 # Chapter 5 - Compressing Data via Dimensionality Reduction  
 
-**Status:** In-Work  
+**Status:** Completed  
 **Code:** Dimensionality Reduction  
 **Focus:** Principal Component Analysis for unsupervised data compression, linear discriminant analysis as a supervised dimensionality technique for maximizing class separability
 
@@ -25,5 +25,18 @@
 - Sometimes, we are interested to know about how much each original feature contributes to a given principal component. These contributions are often called *loadings*. The factor loadings can be computed by scaling the eigenvectors by the square root of the eigenvalues. The resulting values can then be interpreted as the correlation between the original features and the principal component.
 - *Linear Discriminant Analysis (LDA)* is a technique used for feature extraction to increase computational efficiency and reduce the degree of overfitting. It is very similar to PCA, but whereas PCA attempts to find the orthogonal component axes of maximum variance in a dataset, the goal in LDA is to find the feature subspace that optimizes class separability.  
 - Both PCA and LDA are linear transformation techniques that can be used to reduce the number of dimensions in a dataset, the former is an unsupervised algorithm whereas the latter is supervised. Thus, we might think that LDA is a superior technique for classification tasks compared to PCA. However, preprocessing via PCA tends to result in better classification in image recognition tasks in certain cases, for example, if each class consists of only a small number of examples.
-- One assumption in LDA is that the data is normally distributed. Also, we assume that the classes have identical covariance matrices and that the training examples are statistically independent of each other. However, even if one or more of these assumptions are slightly violated, LDA for dimensionality reduction can still work reasonably well. 
-- 
+- One assumption in LDA is that the data is normally distributed. Also, we assume that the classes have identical covariance matrices and that the training examples are statistically independent of each other. However, even if one or more of these assumptions are slightly violated, LDA for dimensionality reduction can still work reasonably well.  
+- The steps for LDA are:
+  - Standardize the d-dimensional dataset
+  - For each class, compute the d-dimensional mean vector
+  - Construct the between-class scatter matrix $\mathbf{S}_{B}$, and the within-class scatter matrix $\mathbf{S}_{W}$
+  - Compute the eigenvectors and corresponding eigenvalues of the matrix $\mathbf{S}_{W}^{-1}\mathbf{S}_{B}^$
+  - Sort the eigenvalues by decreasing order to rank the corresponding eigenvectors
+  - Choose the k eigenvectors that correspond to the k largest eigenvalues to construct a d $\times$ k dimensional transformation matrix $\mathbf{W}$, the eigenvectors are the columns of this matrix
+  - Project the examples onto the new feature subspace using the transformation matrix $\mathbf{W}$
+- If we are dealing with nonlinear problems, which we may encounter rather frequently in real-world applications, linear transformation techniques for dimensionality reduction, such as PCA and LDA, may not the best choice.
+- The development and application of nonlinear dimensionality reduction techniques is also often referred to as *manifold learning*, where a manifold refers to a lower dimensional topological space embedded in a high-dimensional space. Algorithms for manifold learning have to capture the complicated structure of the data in order to project it onto a lower-dimensional space where the relationship between data points is preserved.
+- While nonlinear dimensionality reduction and manifold learning algorithms are very powerful, we should note that these techniques are notoriously hard to use, and with non-ideal hyperparameter choices, they may cause more harm than good. The reason behind this difficulty is that we are often working with high-dimensional datasets that we cannot readily visualize and where the structure is not obvious. Moreover, unless we project the dataset into two or three dimensions, it is hard or even impossible to asses the quality of the results. Hence, many people still rely on simpler techinques like PCA and LDA.
+- In a nutshell, *t-distributed stochastic neighbor embedding (t-SNE)* is modeling data points based on their pair-wise distances in the high-dimensional (original) feature space. Then, it finds a probability distribution of pair-wise distances in the original space. Then it finds a probability distribution of pair-wise distances in the new, lower-dimensional space that is close to the probability distribution of pair-wise distances in the original space. In other words, t-SNE learns to embed data points into a lower-dimensional space such that the pairwise distances in the original space are preserved.  
+- t-SNE is a technique intended for visualization purposes as it requires the whole dataset for projection. Since it projects the points directly (unlike PCA it does not involve a projection matrix), we cannot apply t-SNE to new data points.  
+- Another popular visualization technique is *uniform manifold approximation and projection (UMAP)*. While UMAP can produce similarly good results as t-SNE, it is typically faster and can also be used to project new data, which makes it more attractive as a dimensionality reduction technique in machine learning context.  
