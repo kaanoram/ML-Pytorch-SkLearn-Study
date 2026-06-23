@@ -39,10 +39,10 @@
 
 Error and Accuracy
 
-$ \text{ERR} = \frac{\text{FP} + \text{FN}}{\text{FP} + \text{FN} + \text{TP} + \text{TN}} $
+$\text{ERR} = \frac{\text{FP} + \text{FN}}{\text{FP} + \text{FN} + \text{TP} + \text{TN}}$
 
-$ \text{ACC} = \frac{\text{TP} + \text{TN}}{\text{FP} + \text{FN} + \text{TP} + \text{TN}} = 1 - \text{ERR} $
+$\text{ACC} = \frac{\text{TP} + \text{TN}}{\text{FP} + \text{FN} + \text{TP} + \text{TN}} = 1 - \text{ERR}$
 
 True Positive Rate and False Positive Rate
 
-$ \text{FPR} = \frac{\text{FP}}{\text{N}} $
+$\text{FPR} = \frac{\text{FP}}{\text{N}}$
