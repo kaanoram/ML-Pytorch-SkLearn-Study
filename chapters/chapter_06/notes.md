@@ -1,6 +1,6 @@
 # Chapter 6 - Learning Best Practices for Model Evaluation and Hyperparameter Tuning
 
-**Status:** In-Work  
+**Status:** Completed  
 **Code:** Hyperparameter Tuning  
 **Focus:** Assess the performance of machine learning models, diagnose the common problems of machine learning algorithms, fine tune machine learning models, evaluate predictive models using different performance metrics
 
@@ -33,16 +33,54 @@
 - There are several other performance metrics besides accuracy to measure a model's relevance, such as *precision*, *recall*, *F1 score*, and *Matthews correlation coefficient (MCC)*.  
 - A *confusion matrix* is a square matrix that reports the counts of *true positive (TP)*, *true negative (TN)*, *false positive (FP)*, and *false negative (FN)* predictions of a classifier.  
 - Both the prediction *error (ERR)* and *accuracy (ACC)* provide general information about how many examples are misclassified. The error can be understood as the sum of all false predictions divided by the number of total predictions, and the accuracy is calculated as the sum of correct predictions divided by the total number of predictions.
-- The *true positive rate (TPR)* and *false positive rate (FPR)* are performance metrics that are especially useful for imbalanced class problems. In tumor diagnosis for example
+- The *true positive rate (TPR)* and *false positive rate (FPR)* are performance metrics that are especially useful for imbalanced class problems. In tumor diagnosis for example, we are more concerned with the detection of malignant tumors in order to help a patient with the appropriate treatment. However, it is also important to decrease the number of benign tumors incorrectly classified as malignant (FP) to not unnecessarily concern patients. In contrast to the FPR, the TPR provides useful information about the fraction of positive (or relevant) examples that were correctly identified out of the total pool of positives (P).  
+- The performance metrics *precision (PRE)* and *recall (REC)* are related to those TP and TN rates, and in fact, RES is synonymous with TPR. In other words, recall quantifies how many of the relevant records (the positives) are captured as such (true positives). Precision quantifies how many records predicted as relevant (the sum of true and false positives) are actually relevant (true positives).
+- Revisiting the malignant tumor detection example, optimizing for recall helps with minimizing the chance of not detecting a malignant tumor. However, this comes at the cost of predicting malignant tumor in patients although patients are healthy (a high number of FPs). If we optimize for precision on the other hand, we emphasize the correctness if we predict that a patient has a malignant tumor. However, this comes at the cost of missing malignant tumors more frequently (a high number of FNs).  
+- To balance the up-and downsides of optimizing PRE and REC, the harmonic mean of PRE and REC is used, the so-called F1 score.  
+- A measure that summarizes a confusion matrix is the MCC, which is especially popular in biological research context. In contrast to PRE, REC, and the F1 score, the MCC ranges between -1 and 1, and it takes all elements of a confusion matrix into account. While the MCC values are harder to interpret than the F1 score, it is regarded as a superior metric.
+- *Receiving operating characteristic (ROC)* graphs are useful tools to select models for classification based on their performance with respect to the FPR and TPR, which are computed by shifting the decision threshold of the classifier. The diagonal of a ROC graph can be interpreted as random guessing, and classification models that fall below the diagonal are considered worse than random guessing. A perfect classifier would fall into the top-left corner of the graph with a TPR of 1 and an FPR of 0. Based on the ROC curve, we can then compute the *ROC area under the curve (ROC AUC)* to characterize the performance of a classification model.
+- Similar to ROC curves, we can compute *precision-recall curves* for different probability thresholds of a classifier.  
+- Reporting the performance of a classifier as the ROC AUC can yield further insights into a classifier's performance with respect to imbalanced samples. However, while the accuracy score can be interpreted as a single cutoff point on a ROC curve, ROC AUC and accuracy metrics mostly agree with each other.
+- The scoring metrics that we have discussed so far are specific to binary classification systems. However, scikit-learn also implements macro and micro averaging methods to extend those scoring metrics to multiclass problems via *one-vs-all (OvA)* classification. The micro average is calculated from the individual TPs, TNs, FPs, FNs of the system. The macro average is calculated as the average scores of different systems.
+- Micro-averaging is useful if we want to weight each instance or prediction equally, whereas macro-averaging weights all classes equally to evaluate the overall performance of a classifier with regard to the most frequent class labels.  
+- If we are using binary performance metrics to evaluate multiclass classification models in scikit-learn, a normalized or weighted variant of the macro-average is used by default. The weighted macro-average is calculated by weighting the score of each class label by the number of true instances when calculating the average. The weighted macro-average is useful if we are dealing with class imbalances, that is, different numbers of instances for each label.
+- Class imbalance is a quite common problem when working with real-world data - examples from one class or multiple classes are over-represented in a dataset. We can think of several domains where this might occur, such as spam filtering, fraud detection, or screening for diseases.  
+- When we fit classifiers on such datasets, it would make sense to focus on other metrics than accuracy when comparing different models, such as precision, recall, the ROC curve. For instance, our priority might be to identify the majority of patients with malignant cancer to recommend an additional screening, so recall should be our metric of choice. In spam filtering where we don't want to label emails as spam if the system is not very certain, precision might be a more appropriate metric.  
+- Aside from evaluating machine learning models, class imbalance influences a learning algorithm during model fitting itself. Since machine learning algorithms typically optimize a reward or loss function that is computed as a sum over the training examples that it sees during fitting, the decision rule is likely going to be biased toward the majority class. In other words, the algorithm implicitly learns a model that optimizes the predictions based on the most abundant class in the dataset to minimize the loss or maximize the reward during training.
+- One way to deal with imbalanced class proportions during model fitting is to assign a larger penalty to wrong predictions on the minority class. Via scikit-learn, adjusting such a penalty is as convenient as setting the class_weight parameter 'balanced', which is implemented for most classifiers.
+- Other popular strategies for dealing with class imbalance include upsampling the minority class, downsampling the majority class, and the generation of synthetic training examples. Unfortunately, there's no universally best solution or technique that works best across different problem domains. Thus, in practice, it is recommended to try out different strategies on a given problem, evaluate the results, and choose the technique that seems most appropriate.
+- Another technique for dealing with class imbalance is the generation of synthetic training examples. The most widely used algorithm for synthetic data generation is *Synthetic Minority Over-sampling Technique (SMOTE)*.
 
 ## Key Terms/Formulas
 
-Error and Accuracy
+Error and Accuracy:
 
 $\text{ERR} = \frac{\text{FP} + \text{FN}}{\text{FP} + \text{FN} + \text{TP} + \text{TN}}$
 
 $\text{ACC} = \frac{\text{TP} + \text{TN}}{\text{FP} + \text{FN} + \text{TP} + \text{TN}} = 1 - \text{ERR}$
 
-True Positive Rate and False Positive Rate
+True Positive Rate and False Positive Rate:
 
-$\text{FPR} = \frac{\text{FP}}{\text{N}}$
+$\text{FPR} = \frac{\text{FP}}{\text{N}} = \frac{\text{FP}}{\text{FP} + \text{TN}}$
+
+$\text{TPR} = \frac{\text{TP}}{\text{P}} = \frac{\text{TP}}{\text{FN} + \text{TP}}$
+
+Precision and Recall:
+
+$\text{PRE} = \frac{\text{TP}}{\text{TP} + \text{FP}}$
+
+$\text{REC} = \text{TPR} = \frac{\text{TP}}{\text{P}} = \frac{\text{TP}}{\text{FN} + \text{TP}}$
+
+F1 score:
+
+$\text{F1} = 2\frac{\text{PRE} \times \text{REC}}{\text{PRE} + \text{REC}}$
+
+MCC:
+
+$\text{MCC} = \frac{\text{TP} \times \text{TN} - \text{FP} \times \text{FN}}{\sqrt{(\text{TP} + \text{FP}) (\text{TP} + \text{FN}) (\text{TN} + \text{FP}) (\text{TN} + \text{FN})}}$
+
+Micro and Macro Averages:
+
+$\text{PRE_{micro}} = \frac{\text{TP_1} + \cdots + \text{TP_k}}{\text{TP_1} + \cdots + \text{TP_k} + \text{FP_1} + \cdots + \text{FP_k}}$
+
+$\text{PRE_{micro}} = \frac{\text{PRE_1} + \cdots + \text{PRE_k}}{k}$
