@@ -15,4 +15,4 @@
 
 Majority voting:
 
-$\hat{y} = mode\{C_1(x), C_2(x), \dots, C_m(x)\}$  
+$\hat{y} = \text{mode}\{C_1(x), C_2(x), \dots, C_m(x)\}$  
