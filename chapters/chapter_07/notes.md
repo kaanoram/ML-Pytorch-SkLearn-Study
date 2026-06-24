@@ -15,4 +15,4 @@
 
 Majority voting:
 
-$`\hat{y} = \operatorname{mode}\lbrace C_1(x), C_2(x), \dots, C_m(x)\rbrace`$
+$`\hat{y} = \mathrm{mode}\lbrace C_1(x), C_2(x), \dots, C_m(x)\rbrace`$
