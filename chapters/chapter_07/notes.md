@@ -24,7 +24,6 @@ $P(y \geq k) = \sum_{k}^{n}\binom{n}{k} \epsilon^k (1 - \epsilon)^{n-k} = \epsil
 
 Weighted majority voting:
 
-$\[
-\hat{y} = \underset{i}{\operatorname{arg\,max}}
-\sum_{j=1}^{m} w_j \chi_A\left(C_j(\mathbf{x}) = i\right)
-\]$  
+$$
+\hat{y} = \underset{i}{\arg\max} \sum_{j=1}^{m} w_j \chi_A(C_j(\mathbf{x}) = i)
+$$
