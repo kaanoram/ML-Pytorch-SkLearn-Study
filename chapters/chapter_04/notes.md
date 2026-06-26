@@ -42,8 +42,12 @@
 
 Min-max scaling:
 
-$x_{norm}^{(i)} = \frac{x^{i} - x_{min}}{x_{max} - x_{min}}$
+$$
+x_{norm}^{(i)} = \frac{x^{i} - x_{min}}{x_{max} - x_{min}}
+$$
 
 Standardization:
 
-$x_{std}^{(i)} = \frac{x^{i} - \mu{x}}{\sigma_{x}}$
+$$
+x_{std}^{(i)} = \frac{x^{i} - \mu{x}}{\sigma_{x}}
+$$
