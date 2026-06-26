@@ -49,5 +49,5 @@ $$
 Standardization:
 
 $$
-x_{std}^{(i)} = \frac{x^{i} - \mu{x}}{\sigma_{x}}
+x_{std}^{(i)} = \frac{x^{i} - \mu_{x}}{\sigma_{x}}
 $$
