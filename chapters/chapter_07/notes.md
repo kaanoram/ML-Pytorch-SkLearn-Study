@@ -31,7 +31,7 @@
     - Compute the coefficient: $\alpha_{j} = 0.5 log \frac{1-\epsilon}{\epsilon}$
     - Update the weights: $\vec{w} := \vec{w} \times exp(-\alpha_{j} \times \hat{\vec{y}} \times \vec{y})$
     - Normalize the weights to sum to 1: $\vec{w} := \vec{w}/\sum_{i} w_i$
-  - Compute the final prediction: $\hat{\vec{y}} = (\sum_{j=1}^m(\alpha_j \times predict(C_j, \vec{X})) > 0)$
+  - Compute the final prediction: $\hat{\vec{y}} = (\sum_{j=1}^m(\alpha_j \times predict(C_j, \mathbf{X})) > 0)$
 
 ## Key Terms/Formulas
 
