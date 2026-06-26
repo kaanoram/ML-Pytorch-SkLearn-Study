@@ -26,12 +26,12 @@
   - Set the weight vector $\vec{w}$ to uniform weights, where $\sum_{i} w_i  = 1$
   - For j in m boosting rounds, do the following:
     - Train a weighted weak learner: $C_j = train(X, y, w)$
-    - Predict class labels $\hat{\boldsymbol{y}} = predict(C_j, X)$
-    - Compute the weighted error rate: $\epsilon = \boldsymbol{w} \cdot (\hat{\boldsymbol{y}} \neq \boldsymbol{y})$
+    - Predict class labels $\hat{\vec{y}} = predict(C_j, X)$
+    - Compute the weighted error rate: $\epsilon = \boldsymbol{w} \cdot (\hat{\vec{y}} \neq \vec{y})$
     - Compute the coefficient: $\alpha_{j} = 0.5 log \frac{1-\epsilon}{\epsilon}$
-    - Update the weights: $\boldsymbol{w} := \boldsymbol{w} \times exp(-\alpha_{j} \times \hat{\boldsymbol{y}} \times \boldsymbol{y})$
-    - Normalize the weights to sum to 1: $\boldsymbol{w} := \boldsymbol{w}/\sum_{i} w_i$
-  - Compute the final prediction: $\hat{\boldsymbol{y}} = (\sum_{j=1}^m(\alpha_j \times predict(C_j, \boldsymbol{X})) > 0)$
+    - Update the weights: $\vec{w} := \vec{w} \times exp(-\alpha_{j} \times \hat{\vec{y}} \times \vec{y})$
+    - Normalize the weights to sum to 1: $\vec{w} := \vec{w}/\sum_{i} w_i$
+  - Compute the final prediction: $\hat{\vec{y}} = (\sum_{j=1}^m(\alpha_j \times predict(C_j, \vec{X})) > 0)$
 
 ## Key Terms/Formulas
 
