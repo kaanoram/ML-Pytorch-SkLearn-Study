@@ -26,22 +26,26 @@
   - Set the weight vector $\mathbf{w}$ to uniform weights, where $\sum_{i} w_i  = 1$
   - For j in m boosting rounds, do the following:
     - Train a weighted weak learner: $C_j = train(X, y, w)$
-    - Predict class labels $\hat{\mathbf{y}} = predict(C_j, X)$
+    - Predict class labels $\mathbf{\hat{y}} = predict(C_j, X)$
     - Compute the weighted error rate: $\epsilon = \mathbf{w} \dot (\hat{\mathbf{y}} \neq \mathbf{y})$
     - Compute the coefficient: $\alpha_{j} = 0.5 log \frac{1-\epsilon}{\epsilon}$
     - Update the weights: $\mathbf{w} := \mathbf{w} \times exp(-\alpha_{j} \times \hat{\mathbf{y}} \times \mathbf{y})$
     - Normalize the weights to sum to 1: $\mathbf{w} := \mathbf{w}/\sum_{i} w_i$
-  - Compute the final prediction: $\hat{mathbf{y}} = (\sum_{j=1}^m(\alpha_j \times predict(C_j, \mathbf{X})) > 0$
+  - Compute the final prediction: $\hat{\mathbf{y}} = (\sum_{j=1}^m(\alpha_j \times predict(C_j, \mathbf{X})) > 0$
 
 ## Key Terms/Formulas
 
 Majority voting:
 
-$`\hat{y} = \mathrm{mode}\lbrace C_1(x), C_2(x), \dots, C_m(x)\rbrace`$
+$$`
+\hat{y} = \mathrm{mode}\lbrace C_1(x), C_2(x), \dots, C_m(x)\rbrace`
+$$
 
 Error probability of an ensemble of base classifiers:
 
-$P(y \geq k) = \sum_{k}^{n}\binom{n}{k} \epsilon^k (1 - \epsilon)^{n-k} = \epsilon_{\text{ensemble}}$  
+$$
+P(y \geq k) = \sum_{k}^{n}\binom{n}{k} \epsilon^k (1 - \epsilon)^{n-k} = \epsilon_{\text{ensemble}}
+$$  
 
 Weighted majority voting:
 
