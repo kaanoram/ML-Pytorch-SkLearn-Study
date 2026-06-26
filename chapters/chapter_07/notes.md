@@ -23,7 +23,7 @@
   - Find the training examples in the training dataset which the previous two weak learners disagree upon, to train a third weak learner
   - Combine the weak learners via majority voting
 - Boosting can lead to a decrease in bias as well as variance compared to bagging models. In practice, however, boosting algorithms such as **AdaBoost** are also known for their high variance, that is, the tendency to overfit the training data. In contrast to the original boosting procedure, AdaBoost uses the complete training dataset to train the weak learners, where the training examples are reweighted in each iteration to build a strong classifier that learns from the mistakes of the previous weak learners in the ensemble. The AdaBoost algorithm works as follows:
-  - Set the weight vector $\boldsymbol{w}$ to uniform weights, where $\sum_{i} w_i  = 1$
+  - Set the weight vector $\pmb{w}$ to uniform weights, where $\sum_{i} w_i  = 1$
   - For j in m boosting rounds, do the following:
     - Train a weighted weak learner: $C_j = train(X, y, w)$
     - Predict class labels $\hat{\boldsymbol{y}} = predict(C_j, X)$
@@ -31,7 +31,7 @@
     - Compute the coefficient: $\alpha_{j} = 0.5 log \frac{1-\epsilon}{\epsilon}$
     - Update the weights: $\boldsymbol{w} := \boldsymbol{w} \times exp(-\alpha_{j} \times \hat{\boldsymbol{y}} \times \boldsymbol{y})$
     - Normalize the weights to sum to 1: $\boldsymbol{w} := \boldsymbol{w}/\sum_{i} w_i$
-  - Compute the final prediction: $\hat{\boldsymbol{y}} = (\sum_{j=1}^m(\alpha_j \times predict(C_j, \boldsymbol{X})) > 0$
+  - Compute the final prediction: $\hat{\boldsymbol{y}} = (\sum_{j=1}^m(\alpha_j \times predict(C_j, \boldsymbol{X})) > 0)$
 
 ## Key Terms/Formulas
 
