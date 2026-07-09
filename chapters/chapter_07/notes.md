@@ -1,6 +1,6 @@
 # Chapter 7 - Combining Different Models for Ensemble Learning
 
-**Status:** In-Work  
+**Status:** Completed  
 **Code:** Bagging and Boosting  
 **Focus:** Make predictions based on majority voting, use bagging to reduce overfitting by drawing random combinations of the training dataset with repetition, apply boosting to build powerful models from weak learners that learn from their mistakes
 
@@ -32,6 +32,18 @@
     - Update the weights: $\vec{w} := \vec{w} \times exp(-\alpha_{j} \times \hat{\vec{y}} \times \vec{y})$
     - Normalize the weights to sum to 1: $\vec{w} := \vec{w}/\sum_{i} w_i$
   - Compute the final prediction: $\hat{\vec{y}} = (\sum_{j=1}^m(\alpha_j \times predict(C_j, \mathbf{X})) > 0)$
+- It is worth noting that ensemble learning increases the computational complexity compared to individual classifiers. In practice, we need to think carefully about whether we want to pay the price of increased computational costs for an often relatively modest improvement in predictive performance.
+- **Gradient boosting** is another variant of the boosting concept that successively trains weak learners to create a strong ensemble. Gradient boosting is an extremely important topic because it forms the basis of popular machine learning algorithms such as XGBoost.  
+- Fundamentally, gradient boosting is very similar to AdaBoost. AdaBoost trains decision tree stumps based on errors of the previous decision tree stump. In particular, errors are used to compute sample weights in each round as well as for computing a classifier weight for each decision tree stump when combining the individual stumps into an ensemble. We stop training once a maximum number of iterations is reached. Like AdaBoost, gradient boosting fits the decision trees in an iterative fashion using prediction errors. However, gradient boosting trees are usually deeper than decision tree stumps and have typically a maximum depth of 3 to 6 (or a maximum number of 8 to 64 leaf nodes). Also, in contrast to AdaBoost, gradient boost does not use prediction errors for assigning sample weights, they are used directly to form the target variable for fitting the next tree. Moreover, instead of having an individual weighting term for each tree, like in AdaBoost, gradient boosting uses a global learning rate that is the same for each tree.
+- In essence, gradient boosting builds a series of trees, where each tree is fit on the error - the difference between the label and the predicted value - of the previous tree. In each round, the tree ensemble improves as we are nudging each tree more in the right direction via small updates. These updates are based on a loss gradient, which  is how gradient boosting got its name. Here are the main steps:
+  - Initialize a model to return a constant prediction value. For this, use a decision tree root node. We denote the value returned by the tree as $\hat{y}$ and we find this value by minimizing a differentiable loss function L. $F_0(x) = \underset{\hat{y}}{\arg\min} \sum_{i=1}^n L(y_i, \hat{y})$
+  - For each tree $ m = 1, \cdots, M, $ where M is a user-specified total number of trees, we carry out the following computations:
+    - Compute the difference between a predicted value $F(x_i) = \hat{y}_i$ and the class label $y_i$. This value is sometimes called the pseudo-response or pseudo-residual. More formally, we can write this pseudo-residual as the negative gradient of the loss function with respect to the predicted values.
+    - Fit a tree to the pseudo-residuals.
+    - For each leaf node compute $\gamma_{jm}$ by finding the minimum $\gamma$ that minimizes the loss function $L(y_i, F_{m-1}(x_i) + \gamma)$ where $F_{m-1}(x)$ refers to the prediction of the previous tree for the training example.
+    - Update the model by adding output values $\gamma_m$ to the previous tree: $F_m(x) = F_{m-1}(x) + \eta\gamma_m$. However, instead of adding the full predicted values of the current tree $\gamma_m$ to the previous tree, we scale by a learning rate $\eta$, which is typically a small value between 0.01 and 1. In other words, we update the model incrementally by taking small steps, which helps avoid overfitting.
+- It is important to note that gradient boosting is a sequential process that can be slow to train. However, in recent years a more popular implementation of gradient boosting has emerged, **XGBoost**.
+- XGBoost stands for extreme gradient boosting and has proposed several tricks and approximations that speed up the training process substantially. There are other implementations of gradient boosting such as LightGBM and CatBoost.
 
 ## Key Terms/Formulas
 
