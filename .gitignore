@@ -31,3 +31,6 @@ Thumbs.db
 build/
 dist/
 *.egg-info/
+
+chapters/chapter_08/aclImdb/
+chapters/chapter_08/aclImdb_v1.tar.gz
