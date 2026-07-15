@@ -1,7 +1,7 @@
 # Chapter 9 - Predicting Continuous Target Variables with Regression Analysis
 
-**Status:** In-work
-**Code:** Regression Analysis
+**Status:** In-work  
+**Code:** Regression Analysis  
 **Focus:** Exploring and visualizing datasets, looking at different approaches to implementing linear regression models, training regression models that are robust to outliers, evaluating regression models and diagnosing common problems, fitting regression models to nonlinear data
 
 ## Summary
@@ -47,12 +47,10 @@ $$
 Pearson's coefficient:
 
 $$
-r =
-\frac{\sum_{i=1}^{n}\left[(x^{(i)}-\mu_x)(y^{(i)}-\mu_y)\right]}
+r = \frac{\sum_{i=1}^{n}\left[(x^{(i)}-\mu_x)(y^{(i)}-\mu_y)\right]}
 {\sqrt{\sum_{i=1}^{n}(x^{(i)}-\mu_x)^2}
 \sqrt{\sum_{i=1}^{n}(y^{(i)}-\mu_y)^2}}
-=
-\frac{\sigma_{xy}}{\sigma_x \sigma_y}
+= \frac{\sigma_{xy}}{\sigma_x \sigma_y}
 $$
 
 Mean squared error:
