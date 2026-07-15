@@ -56,7 +56,7 @@ $$
 Mean squared error:
 
 $$
-MSE = \frac{1}{n} \sum_{i=1}^{n}(y^{(i)} - \hat{y}^{i})^2
+MSE = \frac{1}{n} \sum_{i=1}^{n}(y^{(i)} - \hat{y}^{(i)})^2
 $$
 
 Mean absolute error:
@@ -74,17 +74,17 @@ $$
 Sum of squared errors:
 
 $$
-SSE = \sum_{i=1}^n (y^(i) - \hat{y}^(i))^2
+SSE = \sum_{i=1}^n (y^{(i)} - \hat{y}^{(i)})^2
 $$
 
 Total sum of squares:
 
 $$
-SST = \sum_{i=1}^n (y^(i) - \mu_y)^2
+SST = \sum_{i=1}^n (y^{(i)} - \mu_y)^2
 $$
 
 Ridge regression loss function:
 
 $$
-L(w)_{Ridge} = \sum_{i=1}^{n}(y^{(i)} - \hat{y}^{(i)}) + \lambda\|\mathbf{v}\|_2^{2}
+L(w)_{Ridge} = \sum_{i=1}^{n}(y^{(i)} - \hat{y}^{(i)}) + \lambda \lVert \mathbf{v} \rVert _2^{2}
 $$
