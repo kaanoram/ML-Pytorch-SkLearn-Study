@@ -1,6 +1,6 @@
 # Chapter 9 - Predicting Continuous Target Variables with Regression Analysis
 
-**Status:** In-work  
+**Status:** Completed  
 **Code:** Regression Analysis  
 **Focus:** Exploring and visualizing datasets, looking at different approaches to implementing linear regression models, training regression models that are robust to outliers, evaluating regression models and diagnosing common problems, fitting regression models to nonlinear data
 
@@ -28,7 +28,14 @@
 - SST is the total sum of squares, which is the variance of the response.
 - For the training dataset, $R^2$ is bounded between 0 and 1, but it can become negative for the test dataset. A negative $R^2$ means that the regression model fits the data worse than a horizontal line representing the sample mean. In practice, this often happens in the case of extreme overfitting, or if we forget to scale the test set in the same manner we scaled the training set. If $R^2 = 1$, the model fits the data perfectly with a corresponding $MSE = 0$.
 - Regularization is one approach to tackling the problem of overfitting by adding additional information and thereby shrinking the parameter values of the model to induce a penalty against complexity. The most popular approaches to regularized linear regression are the so-called **ridge regression, least absolute shrinkage and selection operator (LASSO)** and **elastic net**.
-- Ridge regression is an L2-penalized model where we simply add the squared sum of the weights to the MSE loss function
+- Ridge regression is an L2-penalized model where we simply add the squared sum of the weights to the MSE loss function. By increasing the value of the hyperparameter $\lambda$, we increase the regularization strength and thereby shrink the weights of our model.
+- An alternative approach that can lead to sparse models is LASSO. Depending on the regularization strength, certain weights can become zero, which also makes LASSO useful as a supervised feature selection technique. The L1 penalty for LASSO is defined as the sum of the absolute magnitudes of the model weights.
+- A limitation of LASSO is that it selects at most n features if $m > n$, where n is the number of training examples. This may be undesirable in certain applications of feature selection. In practice, however, this property of LASSO is often an advantage because it avoids saturated models. The saturation of a model occurs if the number of training examples is equal to the number of features, which is a form of overparameterization. As a consequence, a saturated model can always fit the training data perfectly but is merely a form of interpolation and thus is not expected to generalize well.
+- A compromise between ridge regression and LASSO is elastic net, which has an L1 penalty to generate sparsity and an L2 penalty such that it can be used for selecting more than n features if $m > n$.
+- One way to account for the violation of the linearity assumption between explanatory and response variables is to use a polynomial regression model by adding polynomial terms. Although we can use polynomial regression to model a nonlinear relationship, it is still considered a multiple linear regression model because of the linear regression coefficients.
+- An advantage of the decision tree algorithm is that it works with arbitrary features and does not require any transformation of the features if we are dealing with nonlinear data because decision trees analyze one feature at a time, rather than taking weighted combinations into account. (Likewise, normalizing or standardizing is not required for decision trees.)
+- When we used decision trees for classification, we defined entropy as a measure of impurity to determine which feature split maximizes the information gain. Here, $x_i$ is the feature to perform the split, $N_p$ is the number of training examples at the parent node, and $D_{left}$ and $D_{right}$ are the subsets of the training examples at the left and right child nodes after the split. To use a decision tree for regression, we need an impurity metric that is suitable for continous variables, so we define the impurity measure of a node as the MSE instead. In the context of decision tree regression, the MSE is often referred to as **within-node variance**, which is why the splitting criterion is also better known as **variance reduction**.
+- A random forest usually has a better generalization performance than an individual tree due to randomness, which helps to decrease the model's variance. Other advantages of random forests are that they are less sensitive to outliers in the dataset and don't require much parameter tuning. The only parameter in random forests that we typically need to experiment with is the number of trees in the ensemble. The difference between random forest algorithm for regression and classification is that we use the MSE criterion to grow the individual decision trees, and the predicted target variable is calculated as the average prediction across all decision trees.
 
 ## Key Terms/Formulas
 
@@ -86,5 +93,23 @@ $$
 Ridge regression loss function:
 
 $$
-L(w)_{Ridge} = \sum_{i=1}^{n}(y^{(i)} - \hat{y}^{(i)}) + \lambda \lVert \mathbf{v} \rVert _2^{2}
+L(w)_{Ridge} = \sum_{i=1}^{n}(y^{(i)} - \hat{y}^{(i)})^2 + \lambda \lVert \mathbf{w} \rVert _2^{2}
+$$
+
+Lasso loss function:
+
+$$
+L(w)_{Lasso} = \sum_{i=1}^{n}(y^{(i)} - \hat{y}^{(i)})^2 + \lambda \lVert \mathbf{w} \rVert _1
+$$
+
+Elastic net loss function:
+
+$$
+L(w)_{Elastic Net} = \sum_{i=1}^{n}(y^{(i)} - \hat{y}^{(i)})^2 + \lambda _2 \lVert \mathbf{w} \rVert _2^{2} + \lambda _1 \lVert \mathbf{w} \rVert _1
+$$
+
+Information Gain:
+
+$$
+IG (D_p, x_i) = I(D_p) - \frac{N_{left}}{N_p}I(D_{left}) - \frac{N_{right}}{N_p}I(D_{right})
 $$
