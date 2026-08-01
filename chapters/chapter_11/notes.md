@@ -53,10 +53,12 @@ $$
 Forward propagation:
 
 $$
-\mathbf{Z}^{(h)} = \mathbf{X}^{(in)}\mathbf{W}^{(h)T} + \mathbf{b}^{(h)} \text{(net input of the hidden layer)} \\
-\mathbf{A}^{(h)} = \sigma(\mathbf{Z}^{(h)}) \text{(activation of the hidden layer)}\\
-\mathbf{Z}^{(out)} = \mathbf{A}^{(h)}\mathbf{W}^{(out)T} + \mathbf{b}^{(out)} \text{(net input of the output layer)}\\
-\mathbf{A}^{(out)} = \sigma(\mathbf{Z}^{(out)}) \text{(activation of the output layer)}
+\begin{aligned}
+\mathbf{Z}^{(h)} &= \mathbf{X}^{(in)}\mathbf{W}^{(h)T} + \mathbf{b}^{(h)} && \text{(net input of the hidden layer)} \\
+\mathbf{A}^{(h)} &= \sigma(\mathbf{Z}^{(h)}) && \text{(activation of the hidden layer)} \\
+\mathbf{Z}^{(out)} &= \mathbf{A}^{(h)}\mathbf{W}^{(out)T} + \mathbf{b}^{(out)} && \text{(net input of the output layer)} \\
+\mathbf{A}^{(out)} &= \sigma(\mathbf{Z}^{(out)}) && \text{(activation of the output layer)}
+\end{aligned}
 $$
 
 Gradient for output layer weight:
@@ -86,7 +88,7 @@ $$
 The gradient of the loss function with respect to the output layer weight:
 
 $$
-\frac{\partial L}{\partial w_{1, 1}^{(out)}} = \frac{\partial L}{\partial a_1^{(out)}}\frac{\partial a_1^{(out)}}{\partial z_1^{(out)}}\frac{\partial z_{1}^{(out)}}{\partial w_{1, 1}^{(out)}}
+\frac{\partial L}{\partial w_{1, 1}^{(out)}} = \frac{\partial L}{\partial a_1^{(out)}}\frac{\partial a_1^{(out)}}{\partial z_1^{(out)}}\frac{\partial z_{1}^{(out)}}{\partial w_{1, 1}^{(out)}} = 2(a_1^{(out)} - y)a_1^{(out)}(1 - a_1^{(out)})a_1^{(h)}
 $$
 
 The gradient of the loss function with respect to the hidden layer weight:
