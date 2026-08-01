@@ -8,3 +8,4 @@ matplotlib-inline==0.2.1
 xgboost==3.3
 nltk==3.10.0
 mlxtend==0.25.0
+pyarrow==25.0.0
