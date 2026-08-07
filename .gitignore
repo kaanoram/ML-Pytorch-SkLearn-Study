@@ -39,3 +39,4 @@ chapters/chapter_08/aclImdb_v1.tar.gz
 # Downloaded datasets (Chapter 12)
 chapters/chapter_12/celeba/
 chapters/chapter_12/MNIST/
+chapters/chapter_12/*.pt
