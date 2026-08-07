@@ -32,5 +32,10 @@ build/
 dist/
 *.egg-info/
 
+# Downloaded datasets (Chapter 8)
 chapters/chapter_08/aclImdb/
 chapters/chapter_08/aclImdb_v1.tar.gz
+
+# Downloaded datasets (Chapter 12)
+chapters/chapter_12/celeba/
+chapters/chapter_12/MNIST/
