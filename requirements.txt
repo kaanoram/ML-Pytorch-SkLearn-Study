@@ -12,3 +12,5 @@ pyarrow==25.0.0
 torch==2.12.1
 torchvision==0.27.1
 gdown==6.1.0
+pytorch-lightning==2.6.5
+tensorboard==2.21
