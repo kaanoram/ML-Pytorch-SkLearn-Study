@@ -1,0 +1,20 @@
+# Chapter 14 - Classifying Images with Deep Convolutional Neural Networks
+
+**Status:** In-Work
+**Code:** Neural Networks  
+**Focus:** Convolution operations in one and two dimensions, the building blocks of CNN architectures, implementing deep CNNs in PyTorch, data augmentation techniques for improving generalization of performance, implementing a facial CNN classifier for recognizing if someone is smiling or not
+
+## Summary
+
+- CNNs are a family of models that were originally inspired by how the visual cortex of the human brain works when recognizing objects. Due to the outstanding performance of CNNs for image classification tasks, this particular type of feedforward NN gained a lot of attention and led to tremendous improvements in machine learning for computer vision.
+- Successfully extracting **salient (relevant) features** is key to the performance of any machine learning algorithm, and traditional machine learning models rely on input features that may come from a domain expert or are based on computational feature extraction techniques.
+- Certain types of NNs, such as CNNs, can automatically learn the features from raw data that are most useful for a particular task. For this reason, it's common to consider CNN layers as feature extractors: the early layers (those right after the input layer) extract **low-level features** from raw data, and the later layers (often **fully connected layers**, as in a **multilayer perceptron(MLP)**) use these features to predict a continuous target value or class label.
+- Certain types of multilayer NNs, and in particular, deep CNNs, construct a so-called **feature hierarchy** by combining the low-level features in a layer-wise fashion to form high-level features. For example, if we're dealing with images, then low-level features, such as edges and blobs, are extracted from the earlier layers, which are combined to form high-level features. These high-level features can form more complex shapes, such as the general contours of objects like buildings, cats or dogs.
+- A CNN computes **feature maps** from an input image, where each element comes from a local path of pixels in the input image.
+- This local patch of pixels is referred to as the **local receptive field**. CNNs will usually perform very well on image-related tasks, and that's largely due to two important ideas:
+  - **Sparse connectivity**: A single element in the feature map is connected to only a small patch of pixels. (This is very different from connecting to the whole input image, as in the case of MLPs.)
+  - **Parameter sharing**: The same weights are used for different patches of the input image.
+- As a direct consequence of these two ideas, replacing a conventional, fully connected MLP with a convolution layer substantially decreases the number of weights (parameters) in the network, and we will see an improvement in the ability to capture salient features. In the context of image data, it makes sense to assume that nearby pixels are typically more relevant to each other than pixels that are far away from each other.
+- Typically, CNNs are composed of several **convolutional** and subsampling layers that are followed by one or more fully connected layers at the end. The fully connected layers are essentially an MLP, where every input unit, i, is connected to every output unit, j, with weight $w_{ij}$.
+- Note that subsampling layers, commonly known as **pooling layers**, do not have any learnable parameters; for instance, there are no weights or bias units in pooling layers. However, both the convolutional and fully connected layers have weights and biases that are optimized during training.
+- A **discrete convolution** (or simply **convolution**) is a fundamental operation in a CNN. Therefore, it's important to understand how this operation works. 
