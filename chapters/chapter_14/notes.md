@@ -91,9 +91,5 @@ Y = X * W \rightarrow Y[i, j] = \sum_{k_1 = -\infty}^{+ \infty} \sum_{k_2 = -\in
 $$
 
 $$
-p_{\mathrm{Ensemble}}
-=
-\left[
-\prod_{j=1}^{M} p^{(i)}
-\right]^{\frac{1}{M}}
+p_{\mathrm{Ensemble}} = \left[\prod_{j=1}^{M} p^{(i)}\right]^{\frac{1}{M}}
 $$
