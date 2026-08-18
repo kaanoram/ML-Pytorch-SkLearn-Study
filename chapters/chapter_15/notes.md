@@ -98,8 +98,8 @@ Input gate and the candidate value (LSTM):
 $$
 \begin{aligned}
 \boldsymbol{i}_t
-  &= \sigma\!\left(\boldsymbol{W}_{xi}\boldsymbol{x}^{(t)} + \boldsymbol{W}_{hi}\boldsymbol{h}^{(t-1)} + \boldsymbol{b}_i\right) \\
-\widetilde{\boldsymbol{C}}_t &= \tanh\!\left(\boldsymbol{W}_{xc}\boldsymbol{x}^{(t)} + \boldsymbol{W}_{hc}\boldsymbol{h}^{(t-1)} + \boldsymbol{b}_c\right)
+  &= \sigma\left(\boldsymbol{W}_{xi}\boldsymbol{x}^{(t)} + \boldsymbol{W}_{hi}\boldsymbol{h}^{(t-1)} + \boldsymbol{b}_i\right) \\
+\widetilde{\boldsymbol{C}}_t &= \tanh\left(\boldsymbol{W}_{xc}\boldsymbol{x}^{(t)} + \boldsymbol{W}_{hc}\boldsymbol{h}^{(t-1)} + \boldsymbol{b}_c\right)
 \end{aligned}
 $$
 
