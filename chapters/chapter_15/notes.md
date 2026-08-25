@@ -1,6 +1,6 @@
 # Chapter 15 - Modeling Sequential Data Using Recurrent Neural Networks
 
-**Status:** In-work
+**Status:** Completed
 **Code:** Neural Networks  
 **Focus:** Introducing sequential data, RNNs for modeling sequences, long short-term memory, truncated backpropagation through time, implementing a multilayer RNN for sequence modeling in PyTorch, RNN sentiment analysis of the IMDb movie review dataset, RNN character-level language modeling with LSTM cells, using text data from Jules Verne's The Mysterious Island, using gradient clipping to avoid exploding gradients
 
@@ -53,7 +53,10 @@
 - In an LSTM cell, there are three different types of gates, which are known as the forget gate, the input gate, and the output gate:
   - The **forget gate ($f_t$)** allows the memory cell to reset the cell state without growing indefinitely. In fact, the forget gate decides which information is allowed to go through and which information to suppress. Now, $f_t$, is computed as follows (eq 6). Note that the forget gate was not part of the original LSTM cell, it was added a few years later to improve the original model.
   - The **input gate ($i_t$)**: and **candidate value ($\widetilde{C}_t$)** are responsible for updating the cell state. They are computed as follows (eq 7).
-  - The cell state at time $t$ is computed as follows:
+  - The cell state at time $t$ is computed as follows (eq 8)
+  - The **output gate ($o_t$) decides how to update the values of hidden units (eq 9)
+  - The hidden units at the current time step are computed as follows (eq 10)
+- LSTMs provide a basic approach for modeling long-range dependencies in sequences. Yet, it is important to note that there are many variations of LSTMs described in literature. Also worth noting is a more recent approach, **gated recurrent unit (GRU)**, which was proposed in 2014. GRUs have a simpler architecture than LSTMs; therefore, they are computationally more efficient, while their performance in some tasks, such as polyphonic music modeling, is cmomparable to LSTMs.
   
 ### Key Terms/Formulas
 
@@ -107,4 +110,16 @@ Cell state at time t (LSTM):
 
 $$
 \boldsymbol{C}^{(t)} = \left(\boldsymbol{C}^{(t-1)} \odot \boldsymbol{f}_t\right) \oplus \left(\boldsymbol{i}_t \odot \widetilde{\boldsymbol{C}}_t\right)
+$$
+
+Output gate (LSTM):
+
+$$
+o_t = \sigma(W_{xo}x^{(t)} + W_{ho}h^{(t-1)} + b_o)
+$$
+
+Hidden units (LSTM):
+
+$$
+h^{(t)} = o_t \odot \tanh(C^{(t)})
 $$
