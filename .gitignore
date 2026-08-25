@@ -48,3 +48,6 @@ chapters/chapter_13/lightning_logs/
 # Downloaded datasets (Chapter 14)
 chapters/chapter_14/celeba/
 chapters/chapter_14/MNIST/
+
+# Downloaded datasets (Chapter 15)
+chapters/chapter_15/1268-0.txt
