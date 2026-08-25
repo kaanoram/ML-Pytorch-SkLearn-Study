@@ -14,3 +14,4 @@ torchvision==0.27.1
 gdown==6.1.0
 pytorch-lightning==2.6.5
 tensorboard==2.21
+datasets==5.0.1
