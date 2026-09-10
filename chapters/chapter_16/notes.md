@@ -27,7 +27,7 @@
 - Each $ith$ element in these sequences, $x^{(i)}$ and $z^{(i)}$, are vectors of size d (that is, $x^{(i)} \in R^{d}$) representing the feature information for the input at position $i$, which is similar to RNNs. Then, for a seq2seq task, the goal of self-attention is to model the dependencies of the current input element to all other input elements. To achieve this, self-attention mechanisms are composed of three stages. First, we derive importance weights based on the similarity between the current element and all other elements in the sequence. Second, we normalize the weights, which usually involves the use of the already familiar softmax function. Third, we use these weights in combination with the corresponding sequence elements to compute the attention value.
 - More formally, the output of self-attention, $z^{(i)}$, is the weighted sum of all T input sequences, $x^{(j)}$ (where $j = 1 \ldots T$). For instance, for the $ith$ input element, the corresponding output value is computed as follows (eq 3). Hence, we can think of $z^{(i)}$ as a context-aware embedding vector in input vector $x^{(i)}$ that involves all other input sequence elements weighted by their respective attention weights. Here, the attention weights, $\alpha_{ij}$, are computed based on the similarity between the current input element, $x^{(i)}$, and all other elements in the input sequence, $x^{(1)}, \ldots, x^{(T)}$. More concretely, this similarity is computed in two steps.
 - First, we compute the dot product between the current input element, $x^{(i)}$, and another element in the input sequence $x^{(j)}$.
-- We have learned how to compute the similarity-based weights for the $ith$ input and all inputs in the sequence $\(x^{(1)} \mathrm{to} x^{(T)}\)$, the "raw" weights $(\omega_{i1} \mathrm{to} \omega_{iT})$. We can obtain the attention weights, $\alpha_{ij}$, by normalizing the $\omega_{ij}$ values via the familiar softmax function (eq 4). Notice that the denominator involves a sum over all input elements $(1 \ldots T)$. Hence, due to applying this softmax function, the weights will sum to 1 after this normalization.
+- We have learned how to compute the similarity-based weights for the $ith$ input and all inputs in the sequence $(x^{(1)} \mathrm{to} x^{(T)})$, the "raw" weights $(\omega_{i1} \mathrm{to} \omega_{iT})$. We can obtain the attention weights, $\alpha_{ij}$, by normalizing the $\omega_{ij}$ values via the familiar softmax function (eq 4). Notice that the denominator involves a sum over all input elements $(1 \ldots T)$. Hence, due to applying this softmax function, the weights will sum to 1 after this normalization.
 - Let us recap and summarize the three main steps behind the self-attention operation:
   - For a given input element, $x^{(i)}$, and each $jth$ element in the set $\{1, \ldots, T\}$, compute the dot product, $x^{(i)^{T}}x^{(j)}$
   - Obtain the attention weight, $\alpha_{ij}$, by normalizing the dot products using the softmax function
@@ -41,7 +41,7 @@
 - The transformer architecture was first proposed in the paper Attention Is All You Need. Thanks to the self-attention mechanism, a transformer model can capture long-range dependencies among the elements in an input sequence - in an NLP context, for example, this helps the model better "understand" the meaning of an input sequence.
 - Although this transformer architecture was originally designed for language translation, it can be generalized to other tasks such as English constituency parsing, text generation, and text classification.
 - The encoder receives the original sequential input and encodes the embeddings using a multi-head self-attention module. The decoder takes in the processed input and outputs the resulting sequence (for instance, the translated sentence) using a masked form of self-attention.
-- The overall goal of the encoder block is to take in a sequential input $X = (x^{(1)}, x^{(2)}, \ldots, x^{(T)}) and map it into a continous representation $Z = (z^{(1)}, z^{(2)}, \ldots, z^{(T)})$ that is then passed on to the decoder. The encoder is a stack of six identical layers. Six is not a magic number here but merely a hyperparameter choice made in the original transformer paper. You can adjust the number of layers according to the model performance. Inside each of these identical layers, there are two sublayers: one computes the multi-head self-attention, and the other one is a fully connected layer.
+- The overall goal of the encoder block is to take in a sequential input $X = (x^{(1)}, x^{(2)}, \ldots, x^{(T)})$ and map it into a continous representation $Z = (z^{(1)}, z^{(2)}, \ldots, z^{(T)})$ that is then passed on to the decoder. The encoder is a stack of six identical layers. Six is not a magic number here but merely a hyperparameter choice made in the original transformer paper. You can adjust the number of layers according to the model performance. Inside each of these identical layers, there are two sublayers: one computes the multi-head self-attention, and the other one is a fully connected layer.
 - Let's first talk about **multi-head self-attention**, which is  a simple modification of scaled dot-product attention. In the scaled dot-product attention, we used three matrices (corresponding to query, key, value) to transform the input sequence. In the context of multi-head attention, we can think of this set of three matrices as one attention head. As indicated by its name, in multi-head attention, we now have multiple of such heads (sets of query, value, and key matrices) similar to how convolutional neural networks can have multiple kernels.
 - To explain the concept of multi-head self-attention with $h$ heads in more detail, let's break it down to following steps:
   - First, we read in the sequential input $X = (x^{(1)},  x^{(2)}, \ldots, x^{(T)})$. Suppose each element is embedded by a vector of length d. Here, the input can be embedded into a $T \times d$ matrix. Then, we create $h$ sets of the query, key, and value learning parameter matrices:
@@ -150,12 +150,14 @@ $$
 Attention weights (normalizing the dot products):
 
 $$
-\alpha_{ij} = \frac{\exp{(\omega_{ij})}}{\sum_{j=1}^{T}\exp((\omega{ij}))}
+\alpha_{ij} = \frac{\exp{(\omega_{ij})}}{\sum_{j=1}^{T}\exp((\omega_{ij}))}
 $$
 
 Sinusoidal encoding:
 
 $$
-PE_{(i, 2k)} = \sin(pos/10000^{2k/d_{model}}) \\
-PE_{(i, 2k+1)} = \cos(pos/10000^{2k/d_{model}})$
+\begin{aligned}
+PE_{(i, 2k)} &= \sin(pos/10000^{2k/d_{model}}) \\
+PE_{(i, 2k+1)} &= \cos(pos/10000^{2k/d_{model}})
+\end{aligned}
 $$
