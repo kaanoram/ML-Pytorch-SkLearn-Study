@@ -16,3 +16,4 @@ pytorch-lightning==2.6.5
 tensorboard==2.21
 datasets==5.0.1
 transformers==5.16.1
+evaluate==0.4.6
