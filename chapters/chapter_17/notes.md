@@ -29,16 +29,16 @@
 - While an assessor function, as described in the previous paragraph, would make the image generation task very easy, the question is whether such a universal function to asses the qualify of images exists and, if so, how it is defined. Obviously, as humans, we can easily assess the quality of output images when we observe the outputs of the network; although we cannot (yet) backpropagate the result from our brain to the network. Now, if our brain can assess the quality of synthesized images, can we design an NN model to do the same thing? In fact, that's the general ideal of a GAN.
 - A GAN model consists of an additional NN called **discriminator** ($D$), which is a classifier that learns to detect a synthesized image, $\tilde{x}$, from a real image, $x$.
 - In a GAN model, the two networks, generator and discriminator, are trained together. At first, after initializing the model weights, the generator creates images that do not look realistic. Similarly, the discriminator does a poor job of distinguishing between real images and images synthesized by the generator. But over time (that is, through training), both networks become better as they interact with each other. In fact, the two networks play an adversarial game, where the generator learns to improve its output to be able to fool the discriminator. At the same time, the discriminator becomes better at detecting the synthesized images.
-- The objective function of GANs is as follows (eq 1). Here, $V(\theta^{(D)}, \theta^{(G)})$ is called the **value function**, which can be interpreted as a payoff: we want to maximize its value with respect to the discriminator ($D$), while minimizing its value with respect to the generator ($G$), that is $\min_G \max_D V\!\left(\theta^{(D)}, \theta^{(G)}\right)$. $D(x)$ is the probability that indicates whether the input example, $x$, is real or fake (that is, generated). The expression $\mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}(\mathbf{x})}
+- The objective function of GANs is as follows (eq 1). Here, $V(\theta^{(D)}, \theta^{(G)})$ is called the **value function**, which can be interpreted as a payoff: we want to maximize its value with respect to the discriminator ($D$), while minimizing its value with respect to the generator ($G$), that is $\min_G \max_D V\left(\theta^{(D)}, \theta^{(G)}\right)$. $D(x)$ is the probability that indicates whether the input example, $x$, is real or fake (that is, generated). The expression $\mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}(\mathbf{x})}
   \left[\log D(\mathbf{x})\right]$ refers to the expected value of the quantity in brackets with respect to the examples from the data distribution (distribution of the real examples); $\mathbb{E}_{\mathbf{z}\sim p_{\mathbf{z}}(\mathbf{z})}
   \left[\log\left(1-D\!\left(G(\mathbf{z})\right)\right)\right]$ refers to the expected value of the quantity with respect to the distribution of the input, $z$, vectors.
 
 ### Key Terms/Formulas
 
-$$
-V\!\left(\theta^{(D)}, \theta^{(G)}\right)
+```math
+V\left(\theta^{(D)}, \theta^{(G)}\right)
 = \mathbb{E}_{\mathbf{x}\sim p_{\mathrm{data}}(\mathbf{x})}
   \left[\log D(\mathbf{x})\right]
 + \mathbb{E}_{\mathbf{z}\sim p_{\mathbf{z}}(\mathbf{z})}
-  \left[\log\left(1-D\!\left(G(\mathbf{z})\right)\right)\right]
-$$
+  \left[\log\left(1-D\left(G(\mathbf{z})\right)\right)\right]
+```
